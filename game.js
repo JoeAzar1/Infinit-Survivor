@@ -43,7 +43,7 @@ function resetGame() {
   game = {
     running: true,
     worldX: 0,
-    lastGeneratedX: 0,
+    lastGeneratedX: 1500,
     difficulty: 1,
     distance: 0,
     deathReason: '',
@@ -72,9 +72,19 @@ function resetGame() {
 }
 
 function generateChunk() {
-  const start = Math.max(game.lastGeneratedX, 700);
+  // The visual ground is endless, so collision ground must also be generated endlessly.
+  // Each chunk extends the playable ground from the previous chunk to the new end.
+  const start = game.lastGeneratedX;
   const gap = rand(130, 320);
   const x = start + gap;
+  const end = x + rand(320, 560);
+
+  game.platforms.push({
+    x: start,
+    y: GROUND_Y,
+    w: end - start,
+    h: 95
+  });
 
   const obstacleRoll = Math.random();
   if (obstacleRoll < 0.54) {
@@ -113,7 +123,7 @@ function generateChunk() {
     });
   }
 
-  game.lastGeneratedX = x + rand(320, 560);
+  game.lastGeneratedX = end;
 }
 
 function spawnFireball(x) {
