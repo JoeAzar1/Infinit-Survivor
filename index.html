@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infinite Survivor</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="game-shell">
+    <header class="hud-top">
+      <div class="brand">INFINITE <span>SURVIVOR</span></div>
+      <div class="hud-box"><span>Distance</span><strong id="distance">0 m</strong></div>
+      <div class="hud-box"><span>Record</span><strong id="best">0 m</strong></div>
+    </header>
+
+    <section class="game-frame">
+      <canvas id="gameCanvas" width="960" height="540" aria-label="Jeu Infinite Survivor"></canvas>
+
+      <div id="startOverlay" class="overlay visible">
+        <div class="panel">
+          <p class="eyebrow">JEU 2D — SURVIE INFINIE</p>
+          <h1>Survis le plus loin possible.</h1>
+          <p>Évite les mines et échappe aux boules de feu. Le monde continue de se générer à l'infini.</p>
+          <div class="controls">
+            <span><kbd>A</kbd><kbd>←</kbd> Gauche</span>
+            <span><kbd>D</kbd><kbd>→</kbd> Droite</span>
+            <span><kbd>ESPACE</kbd><kbd>↑</kbd> Saut</span>
+          </div>
+          <button id="startButton">Commencer</button>
+        </div>
+      </div>
+
+      <div id="deathOverlay" class="overlay">
+        <div class="panel death-panel">
+          <p class="eyebrow danger">GAME OVER</p>
+          <h2>Tu as parcouru <strong id="finalDistance">0 m</strong></h2>
+          <p id="deathReason">Tu as été éliminé.</p>
+          <label for="playerName">Nom pour le classement</label>
+          <div class="score-row">
+            <input id="playerName" type="text" maxlength="18" placeholder="Joueur" autocomplete="off">
+            <button id="saveScoreButton">Enregistrer</button>
+          </div>
+          <div id="saveStatus" class="save-status"></div>
+          <button id="restartButton" class="secondary">Rejouer</button>
+          <div id="leaderboard" class="leaderboard"></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer-hint">Objectif : battre ton record. La difficulté augmente avec la distance.</footer>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>
